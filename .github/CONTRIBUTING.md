@@ -6,9 +6,9 @@
 >
 > - If you use LLM / "AI" tools for your contributions, please read and follow our [_Generative AI / LLM Policy_][llm].
 
-Please note that this project is released with a Contributor [Code of Conduct](https://github.com/hynek/prometheus-async/blob/main/.github/CODE_OF_CONDUCT.md).
+Please note that this project is released with a Contributor [Code of Conduct](https://github.com/mahmoudhas/prometheus-trio/blob/main/.github/CODE_OF_CONDUCT.md).
 By participating in this project you agree to abide by its terms.
-Please report any harm to [Hynek Schlawack] in any way you find appropriate.
+Please report any harm to [mahmoudhas] in any way you find appropriate.
 
 
 ## Workflow
@@ -220,8 +220,8 @@ The bug really *was* nasty.
 ```
 
 
-[CI]: https://github.com/hynek/prometheus-async/actions
-[Hynek Schlawack]: https://hynek.me/about/
+[CI]: https://github.com/mahmoudhas/prometheus-trio/actions
+[mahmoudhas]: https://github.com/mahmoudhas
 [*pre-commit*]: https://pre-commit.com/
 [*tox*]: https://https://tox.wiki/
 [semantic newlines]: https://rhodesmill.org/brandon/2012/one-sentence-per-line/
