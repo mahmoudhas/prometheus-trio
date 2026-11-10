@@ -1,6 +1,6 @@
 # prometheus-async
 
-Release **{sub-ref}`release`**  ([What's new?](https://github.com/hynek/prometheus-async/blob/main/CHANGELOG.md))
+Release **{sub-ref}`release`**  ([What's new?](https://github.com/mahmoudhas/prometheus-trio/blob/main/CHANGELOG.md))
 
 ```{include} ../README.md
 :start-after: <!-- teaser-begin -->
@@ -23,12 +23,11 @@ trio
 :hidden:
 :caption: Meta
 
-PyPI <https://pypi.org/project/prometheus-async/>
-GitHub <https://github.com/hynek/prometheus-async/>
-Changelog <https://github.com/hynek/prometheus-async/blob/main/CHANGELOG.md>
-Contributing <https://github.com/hynek/prometheus-async/blob/main/.github/CONTRIBUTING.md>
-Security Policy <https://github.com/hynek/prometheus-async/blob/main/.github/SECURITY.md>
-Funding <https://hynek.me/say-thanks/>
+GitHub <https://github.com/mahmoudhas/prometheus-trio/>
+Upstream <https://github.com/hynek/prometheus-async/>
+Changelog <https://github.com/mahmoudhas/prometheus-trio/blob/main/CHANGELOG.md>
+Contributing <https://github.com/mahmoudhas/prometheus-trio/blob/main/.github/CONTRIBUTING.md>
+Security Policy <https://github.com/mahmoudhas/prometheus-trio/blob/main/.github/SECURITY.md>
 ```
 
 

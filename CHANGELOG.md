@@ -20,7 +20,7 @@ Whenever breaking changes are needed, they are:
 <!-- changelog follows -->
 
 
-## [Unreleased](https://github.com/hynek/prometheus-async/compare/26.1.0...HEAD)
+## [Unreleased](https://github.com/mahmoudhas/prometheus-trio/compare/26.1.0...HEAD)
 
 ### Removed
 
@@ -30,7 +30,7 @@ Whenever breaking changes are needed, they are:
 ### Added
 
 - Python 3.15 support (no code changes necessary).
-- Support for [Trio](https://trio.readthedocs.io/) in the new `prometheus_async.trio` package, along with a `trio` extra that installs the optional dependencies (`pip install prometheus-async[trio]`):
+- Support for [Trio](https://trio.readthedocs.io/) in the new `prometheus_async.trio` package, along with a `trio` extra that installs the optional dependencies:
 
   - The `prometheus_async.trio.time()`, `prometheus_async.trio.count_exceptions()`, and `prometheus_async.trio.track_inprogress()` decorators.
     `time()` follows Trio's clock (and thus `trio.testing.MockClock`) and `count_exceptions()` looks into exception groups.

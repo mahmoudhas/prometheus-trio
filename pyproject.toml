@@ -39,10 +39,10 @@ classifiers = [
 trio = ["trio >= 0.22.0", "h11 >= 0.16.0"]
 
 [project.urls]
-Documentation = "https://prometheus-async.readthedocs.io/"
-Changelog = "https://prometheus-async.readthedocs.io/en/stable/changelog.html"
-GitHub = "https://github.com/hynek/prometheus-async/"
-Funding = "https://hynek.me/say-thanks/"
+Documentation = "https://github.com/mahmoudhas/prometheus-trio/tree/main/docs"
+Changelog = "https://github.com/mahmoudhas/prometheus-trio/blob/main/CHANGELOG.md"
+GitHub = "https://github.com/mahmoudhas/prometheus-trio/"
+Upstream = "https://github.com/hynek/prometheus-async/"
 
 [dependency-groups]
 aiohttp = ["aiohttp>=3"]

@@ -114,6 +114,7 @@ linkcheck_ignore = [
     r"https://github.com/prometheus/client_python#counter",
     # This breaks releases because of non-existent tags.
     r"https://github.com/hynek/prometheus-async/compare/.*",
+    r"https://github.com/mahmoudhas/prometheus-trio/compare/.*",
 ]
 
 intersphinx_mapping = {
