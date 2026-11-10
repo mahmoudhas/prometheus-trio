@@ -19,9 +19,10 @@ dependencies = [
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
 readme = { content-type = "text/markdown", file = "README.md" }
-keywords = ["metrics", "prometheus", "twisted", "asyncio", "async"]
+keywords = ["metrics", "prometheus", "twisted", "asyncio", "trio", "async"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
+    "Framework :: Trio",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -30,6 +31,12 @@ classifiers = [
     "Programming Language :: Python :: 3.15",
     "Typing :: Typed",
 ]
+
+[project.optional-dependencies]
+# Everything you need to expose metrics from Trio apps.  The decorators only
+# need Trio, but the web server and service discovery are based on h11.
+# Trio 0.22 is the first one that uses exception groups.
+trio = ["trio >= 0.22.0", "h11 >= 0.16.0"]
 
 [project.urls]
 Documentation = "https://prometheus-async.readthedocs.io/"
@@ -41,10 +48,13 @@ Funding = "https://hynek.me/say-thanks/"
 aiohttp = ["aiohttp>=3"]
 consul = ["aiohttp>=3"]
 twisted = ["twisted"]
+trio = ["trio", "h11"]
+trio-tests = ["pytest-trio", "trustme"]
 tests = ["coverage[toml]", "pytest", "pytest-asyncio"]
 docs = [
     { include-group = "aiohttp" },
     { include-group = "twisted" },
+    { include-group = "trio" },
     "furo",
     "myst-parser",
     "sphinx-notfound-page",
@@ -54,11 +64,14 @@ dev = [
     { include-group = "tests" },
     { include-group = "aiohttp" },
     { include-group = "twisted" },
+    { include-group = "trio" },
+    { include-group = "trio-tests" },
     "mypy",
     "tox>4",
 ]
 typing = [
     { include-group = "twisted" },
+    { include-group = "trio" },
     "mypy",
     "pyrefly",
     "pyright",
@@ -81,7 +94,8 @@ filterwarnings = [
     "ignore:::importlib[.*]",
     "ignore::DeprecationWarning:twisted.python.threadable",
 ]
-asyncio_mode = "auto"
+# Strict, because in auto mode pytest-asyncio would also try to run Trio tests.
+asyncio_mode = "strict"
 asyncio_default_fixture_loop_scope = "function"
 
 

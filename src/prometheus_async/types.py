@@ -22,6 +22,9 @@ from typing import TYPE_CHECKING, TypeVar
 
 if TYPE_CHECKING:
     from prometheus_async.aio.web import MetricsHTTPServer
+    from prometheus_async.trio.web import (
+        MetricsHTTPServer as TrioMetricsHTTPServer,
+    )
 
 try:
     from twisted.internet.defer import Deferred
@@ -47,6 +50,7 @@ __all__ = [
     "Observer",
     "ParamSpec",
     "ServiceDiscovery",
+    "TrioServiceDiscovery",
 ]
 
 P = ParamSpec("P")
@@ -61,6 +65,18 @@ Deregisterer = Callable[[], Awaitable[None]]
 class ServiceDiscovery(Protocol):
     async def register(
         self, metrics_server: MetricsHTTPServer
+    ) -> Deregisterer | None: ...
+
+
+class TrioServiceDiscovery(Protocol):
+    """
+    Like :class:`ServiceDiscovery`, but for Trio's web server.
+
+    .. versionadded:: 26.2.0
+    """
+
+    async def register(
+        self, metrics_server: TrioMetricsHTTPServer
     ) -> Deregisterer | None: ...
 
 

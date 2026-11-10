@@ -17,15 +17,28 @@
 
 from contextlib import suppress
 from importlib import metadata
+from importlib.util import find_spec
 
 import pytest
 
+
+collect_ignore = []
 
 try:
     import twisted
 except ImportError:
     twisted = None
-    collect_ignore = ["tests/test_tx.py"]
+    collect_ignore.append("tests/test_tx.py")
+
+# What the Trio tests need.
+collect_ignore += [
+    path
+    for path, modules in {
+        "tests/test_trio.py": ("pytest_trio", "trio"),
+        "tests/test_trio_web.py": ("h11", "pytest_trio", "trio", "trustme"),
+    }.items()
+    if not all(find_spec(module) for module in modules)
+]
 
 
 def pytest_report_header(config):

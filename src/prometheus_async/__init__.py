@@ -34,6 +34,13 @@ try:
 except ImportError:
     pass
 
+try:
+    from . import trio
+
+    __all__ += ["trio"]
+except ImportError:
+    pass
+
 
 def __getattr__(name: str) -> str:
     if name != "__version__":
