@@ -1,4 +1,4 @@
-# prometheus-async
+# prometheus-trio
 
 <a href="https://prometheus-async.readthedocs.io/en/stable/"><img src="https://img.shields.io/badge/Docs-Read%20The%20Docs-black" alt="Documentation" /></a>
 <a href="https://github.com/hynek/prometheus-async/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-C06524" alt="License: Apache 2.0" /></a>
@@ -8,29 +8,12 @@
 
 <!-- teaser-begin -->
 
-*prometheus-async* adds support for asynchronous frameworks to the official [Python client](https://github.com/prometheus/client_python) for the [Prometheus](https://prometheus.io/) metrics and monitoring system.
+This is a fork of [*prometheus-async*](https://github.com/hynek/prometheus-async) that adds support for [Trio](https://trio.readthedocs.io/) to the official [Python client](https://github.com/prometheus/client_python) for the [Prometheus](https://prometheus.io/) metrics and monitoring system.
+The Python module is still called `prometheus_async`.
 
-Currently [*asyncio*](https://docs.python.org/3/library/asyncio.html), [Trio](https://trio.readthedocs.io/), and [Twisted](https://twisted.org) are supported.
+Currently Trio and [Twisted](https://twisted.org) are supported.
 
 It works by wrapping the metrics from the official client:
-
-```python
-import asyncio
-
-from aiohttp import web
-from prometheus_client import Histogram
-from prometheus_async.aio import time
-
-REQ_TIME = Histogram("req_time_seconds", "time spent in requests")
-
-
-@time(REQ_TIME)
-async def req(request):
-    await asyncio.sleep(1)
-    return web.Response(body=b"hello")
-```
-
-The same for *Trio*:
 
 ```python
 import trio
@@ -47,10 +30,10 @@ async def req():
 ```
 
 
-Even for *synchronous* applications, the metrics exposure methods can be useful since they are more powerful than the one shipped with the official client.
-For that, helper functions have been added that run them in separate threads (*asyncio* and *Trio* only).
+Even for *synchronous* applications, the metrics server can be useful since it is more powerful than the one shipped with the official client.
+For that, a helper function has been added that runs it in a separate thread.
 
-The source code is hosted on [GitHub](https://github.com/hynek/prometheus-async) and the documentation on [Read the Docs](https://prometheus-async.readthedocs.io/).
+The source code and the documentation are hosted on [GitHub](https://github.com/mahmoudhas/prometheus-trio).
 
 
 ## Credits
