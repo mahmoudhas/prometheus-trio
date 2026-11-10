@@ -128,7 +128,7 @@ Connections that don't do anything for 30 seconds are closed, and so are connect
 
 :::{note}
 If you want to expose metrics from an ASGI application that runs on Trio -- for instance using [Hypercorn](https://hypercorn.readthedocs.io/) -- you don't need any of this.
-Mount [`prometheus_client.make_asgi_app()`](https://github.com/prometheus/client_python#asgi) in your application instead.
+Mount [`prometheus_client.make_asgi_app()`](https://prometheus.github.io/client_python/exporting/http/asgi/) in your application instead.
 :::
 
 ```{eval-rst}
@@ -177,4 +177,4 @@ Adding own service discovery methods is simple:
 All you need is to provide an instance with a coroutine `register(self, metrics_server)` that registers the passed `metrics_server` with the service of your choice and returns another coroutine function that is called for de-registration when the metrics server is shut down.
 It may also return `None` if it didn't register anything.
 
-Have a look at [our implementation](https://github.com/hynek/prometheus-async/blob/main/src/prometheus_async/trio/sd.py) if you need inspiration or check out the `TrioServiceDiscovery` {class}`typing.Protocol` in the [`types` module](https://github.com/hynek/prometheus-async/blob/main/src/prometheus_async/types.py)
+Have a look at [our implementation](https://github.com/mahmoudhas/prometheus-trio/blob/main/src/prometheus_async/trio/sd.py) if you need inspiration or check out the `TrioServiceDiscovery` {class}`typing.Protocol` in the [`types` module](https://github.com/mahmoudhas/prometheus-trio/blob/main/src/prometheus_async/types.py)
