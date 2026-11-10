@@ -28,33 +28,15 @@ from contextlib import suppress
 from typing import TYPE_CHECKING, NamedTuple
 
 from aiohttp import web
-from prometheus_client import CONTENT_TYPE_LATEST, REGISTRY, generate_latest
-from prometheus_client.openmetrics import exposition as openmetrics
+from prometheus_client import REGISTRY
+
+from .._exposition import LANDING_PAGE, choose_generator
 
 
 if TYPE_CHECKING:
     import ssl
 
-    from collections.abc import Callable
-
     from ..types import Deregisterer, ServiceDiscovery
-
-
-def _choose_generator(accept_header: str | None) -> tuple[Callable, str]:
-    """
-    Return the correct generate function according to *accept_header*.
-
-    Default to the old style.
-    """
-    accept_header = accept_header or ""
-    for accepted in accept_header.split(","):
-        if accepted.split(";")[0].strip() == "application/openmetrics-text":
-            return (
-                openmetrics.generate_latest,
-                openmetrics.CONTENT_TYPE_LATEST,
-            )
-
-    return generate_latest, CONTENT_TYPE_LATEST
 
 
 async def server_stats(request: web.Request) -> web.Response:
@@ -63,7 +45,7 @@ async def server_stats(request: web.Request) -> web.Response:
 
     :rtype: :class:`aiohttp.web.Response`
     """
-    generate, content_type = _choose_generator(request.headers.get("Accept"))
+    generate, content_type = choose_generator(request.headers.get("Accept"))
 
     rsp = web.Response(body=generate(REGISTRY))
     # This is set separately because aiohttp complains about `;` in
@@ -74,16 +56,13 @@ async def server_stats(request: web.Request) -> web.Response:
     return rsp
 
 
-_REF = '<html><body><a href="/metrics">Metrics</a></body></html>'
-
-
 async def _cheap(request: web.Request) -> web.Response:
     """
     A view that links to metrics.
 
     Useful for cheap health checks.
     """
-    return web.Response(text=_REF, content_type="text/html")
+    return web.Response(text=LANDING_PAGE, content_type="text/html")
 
 
 async def start_http_server(
