@@ -84,6 +84,7 @@ nitpick_ignore = [
     ("py:class", "R"),
     ("py:class", "ServiceDiscovery"),
     ("py:class", "T"),
+    ("py:class", "TrioServiceDiscovery"),
     ("py:class", "twisted.web.resource.Resource"),
 ]
 
@@ -118,5 +119,6 @@ linkcheck_ignore = [
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "aiohttp": ("https://aiohttp.readthedocs.io/en/stable/", None),
+    "trio": ("https://trio.readthedocs.io/en/stable/", None),
     "twisted": ("https://docs.twisted.org/en/stable/api", None),
 }

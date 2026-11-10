@@ -16,6 +16,7 @@ Release **{sub-ref}`release`**  ([What's new?](https://github.com/hynek/promethe
 installation
 asyncio
 twisted
+trio
 ```
 
 ```{toctree}

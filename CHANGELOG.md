@@ -30,6 +30,18 @@ Whenever breaking changes are needed, they are:
 ### Added
 
 - Python 3.15 support (no code changes necessary).
+- Support for [Trio](https://trio.readthedocs.io/) in the new `prometheus_async.trio` package, along with a `trio` extra that installs the optional dependencies (`pip install prometheus-async[trio]`):
+
+  - The `prometheus_async.trio.time()`, `prometheus_async.trio.count_exceptions()`, and `prometheus_async.trio.track_inprogress()` decorators.
+    `time()` follows Trio's clock (and thus `trio.testing.MockClock`) and `count_exceptions()` looks into exception groups.
+  - A metrics server that doesn't need aiohttp: `prometheus_async.trio.web.serve()`, as well as `prometheus_async.trio.web.start_http_server_in_thread()` for applications that don't use Trio.
+  - Service discovery using a local Consul agent: `prometheus_async.trio.sd.ConsulAgent`.
+  - The `prometheus_async.types.TrioServiceDiscovery` `Protocol`.
+
+
+### Changed
+
+- The tests use pytest-asyncio's strict mode now, so it doesn't interfere with the Trio tests.
 
 
 ## [26.1.0](https://github.com/hynek/prometheus-async/compare/25.1.0...26.1.0) - 2026-03-24

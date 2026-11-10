@@ -10,7 +10,7 @@
 
 *prometheus-async* adds support for asynchronous frameworks to the official [Python client](https://github.com/prometheus/client_python) for the [Prometheus](https://prometheus.io/) metrics and monitoring system.
 
-Currently [*asyncio*](https://docs.python.org/3/library/asyncio.html) and [Twisted](https://twisted.org) are supported.
+Currently [*asyncio*](https://docs.python.org/3/library/asyncio.html), [Trio](https://trio.readthedocs.io/), and [Twisted](https://twisted.org) are supported.
 
 It works by wrapping the metrics from the official client:
 
@@ -30,9 +30,25 @@ async def req(request):
     return web.Response(body=b"hello")
 ```
 
+The same for *Trio*:
+
+```python
+import trio
+
+from prometheus_client import Histogram
+from prometheus_async.trio import time
+
+REQ_TIME = Histogram("req_time_seconds", "time spent in requests")
+
+
+@time(REQ_TIME)
+async def req():
+    await trio.sleep(1)
+```
+
 
 Even for *synchronous* applications, the metrics exposure methods can be useful since they are more powerful than the one shipped with the official client.
-For that, helper functions have been added that run them in separate threads (*asyncio*-only).
+For that, helper functions have been added that run them in separate threads (*asyncio* and *Trio* only).
 
 The source code is hosted on [GitHub](https://github.com/hynek/prometheus-async) and the documentation on [Read the Docs](https://prometheus-async.readthedocs.io/).
 
